@@ -1,0 +1,6 @@
+.DS_Store
+*.zip
+Domaine-ERP-Demo-Nouveau-Projet/
+node_modules/
+dist/
+.env*
