@@ -6,6 +6,7 @@ import { AgingView } from './features/aging/AgingView';
 import { BottlingView } from './features/bottling/BottlingView';
 import { CellarView } from './features/cellar/CellarView';
 import { DemoGuideModal } from './features/demo/DemoGuideModal';
+import { AiCopilotDrawer } from './features/ai/AiCopilotDrawer';
 import { FinanceView } from './features/finance/FinanceView';
 import { OverviewView } from './features/overview/OverviewView';
 import { SalesView } from './features/sales/SalesView';
@@ -17,6 +18,7 @@ export const App: React.FC = () => {
   const { state, role, setRole, resetDemo, feedback, clearFeedback, isReady } = useStore();
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [showDemoGuide, setShowDemoGuide] = useState<boolean>(false);
+  const [showAiCopilot, setShowAiCopilot] = useState<boolean>(false);
   const [confirmReset, setConfirmReset] = useState<boolean>(false);
 
   if (!isReady || !state) {
@@ -92,6 +94,14 @@ export const App: React.FC = () => {
             style={{ fontWeight: 600 }}
           >
             ★ Scénario Démo (10 min)
+          </button>
+
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={() => setShowAiCopilot(true)}
+            style={{ fontWeight: 600, background: '#2E6F56' }}
+          >
+            ✨ Copilote IA
           </button>
 
           <button
@@ -187,6 +197,12 @@ export const App: React.FC = () => {
         onNavigate={(tab) => {
           setActiveTab(tab);
         }}
+      />
+
+      {/* AI Copilot Drawer */}
+      <AiCopilotDrawer
+        isOpen={showAiCopilot}
+        onClose={() => setShowAiCopilot(false)}
       />
     </div>
   );
