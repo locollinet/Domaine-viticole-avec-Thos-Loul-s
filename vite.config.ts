@@ -4,8 +4,13 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: { port: 5173, strictPort: true },
-  preview: { port: 4173, strictPort: true },
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+    host: '0.0.0.0',
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+  },
+  preview: { port: 3000, host: '0.0.0.0' },
   test: {
     environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
